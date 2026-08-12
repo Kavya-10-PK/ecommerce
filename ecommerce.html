@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Fashion Store</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Women's Fashion Store</h1>
+    </header>
+
+    <!-- Search & Filter
+    <section class="filter">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search Product..."
+        >
+
+        <select id="category">
+            <option value="all">All Categories</option>
+            <option value="Dress">women</option>
+            <option value="Kurti">girl</option>
+            <option value="Top">child</option>
+        </select> -->
+    
+<!-- Search & Filter -->
+<section class="filter">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search Product..."
+    >
+
+    <select id="category">
+        <option value="all">All Categories</option>
+        <option value="Dress">Women</option>
+        <option value="Kurti">Girl</option>
+        <option value="Top">Child</option>
+    </select>
+
+    <button id="clearFilter" class="clear-btn">
+        Clear Filter
+    </button>
+
+</section>
+
+
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+
+        <!-- Product 1 -->
+        <div class="card" data-category="Dress">
+
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJDPXup27NHp90c6o3MNYhe0JpnI7kxdDd9ffViS1-wA&s=10" alt="Floral Dress">
+
+            <h3> child Floral Dress</h3>
+
+            <p class="description">
+                Beautiful floral dress for casual wear.
+            </p>
+
+            <p class="price">₹999</p>
+
+            <button class="cart-btn">
+                Add to Cart
+            </button>
+
+        </div>
+
+        <!-- Product 2 -->
+        <div class="card" data-category="Kurti">
+
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1AsPAFeHKoel9XFI1Uah83T5CGXqAgXyqVLF2Rc-AYw&s=10" alt="Cotton Kurti">
+
+            <h3> girls Cotton Kurti</h3>
+
+            <p class="description">
+                Soft cotton kurti for daily comfort.
+            </p>
+
+            <p class="price">₹799</p>
+
+            <button class="cart-btn">
+                Add to Cart
+            </button>
+
+        </div>
+
+        <!-- Product 3 -->
+        <div class="card" data-category="Top">
+
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2g3q7ded1WEcqGDZAd56vPC8BnzAGDORUp1OyMChroQ&s=10" alt="Stylish Top">
+
+            <h3> girls Stylish Top</h3>
+
+            <p class="description">
+                Trendy top for every occasion.
+            </p>
+
+            <p class="price">₹599</p>
+
+            <button class="cart-btn">
+                Add to Cart
+            </button>
+
+        </div>
+
+        <!-- Product 4 -->
+        <div class="card" data-category="Dress">
+
+            <img src="https://i.pinimg.com/236x/28/8a/b7/288ab7efaf691bd89f767604954f7590.jpg" alt="Party Dress">
+
+            <h3> women Party Dress</h3>
+
+            <p class="description">
+                Elegant party wear with premium fabric.
+            </p>
+
+            <p class="price">₹1499</p>
+
+            <button class="cart-btn">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </section>
+
+    <script>
+    
+
+const search = document.getElementById("search");
+const category = document.getElementById("category");
+const cards = document.querySelectorAll(".card");
+const cartButtons = document.querySelectorAll(".cart-btn");
+const clearFilter = document.getElementById("clearFilter");
+
+
+// Search and Filter Function
+function filterProducts() {
+
+    const searchText = search.value.toLowerCase();
+    const selectedCategory = category.value;
+
+    cards.forEach(function(card) {
+
+        const productName =
+            card.querySelector("h3").textContent.toLowerCase();
+
+        const productCategory =
+            card.getAttribute("data-category");
+
+        const searchMatch =
+            productName.includes(searchText);
+
+        const categoryMatch =
+            selectedCategory === "all" ||
+            productCategory === selectedCategory;
+
+        if (searchMatch && categoryMatch) {
+            card.style.display = "block";
+        } 
+        else {
+            card.style.display = "none";
+        }
+
+    });
+}
+
+
+// Search Event
+search.addEventListener("keyup", filterProducts);
+
+
+// Dropdown Event
+category.addEventListener("change", filterProducts);
+
+
+// Clear Filter
+clearFilter.addEventListener("click", function() {
+
+    // Clear search box
+    search.value = "";
+
+    // Reset category
+    category.value = "all";
+
+    // Show all products
+    filterProducts();
+
+});
+
+
+// Add to Cart
+cartButtons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        const productName =
+            this.parentElement.querySelector("h3").textContent;
+
+        alert(productName + " added to cart successfully!");
+
+    });
+
+});
+
+
+
+filterProducts();
+
+
+    </script>
+
+</body>
+</html>
